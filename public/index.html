@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Rift</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#263b59,#090d15 70%);
+ color:white;font-family:Arial,sans-serif;display:flex;align-items:center;
+ justify-content:center;text-align:center;padding:20px
+}
+.panel{width:100%;max-width:600px;padding:45px 25px;background:#101827dd;
+ border:1px solid #526783;border-radius:18px;box-shadow:0 20px 70px #0008}
+.logo{font-size:clamp(38px,9vw,64px);font-weight:900;letter-spacing:4px}
+.season{color:#9db8df;margin-top:12px;font-size:17px}
+.status{margin:30px 0;color:#c6d1e1}
+a{display:inline-block;background:#3185ff;color:white;text-decoration:none;border-radius:8px;
+ padding:16px 55px;font-size:20px;font-weight:bold;cursor:pointer}
+
+footer{margin-top:30px;color:#8190a7;font-size:12px}
+</style>
+</head>
+<body>
+<main class="panel">
+ <div class="logo">PROJECT RIFT</div>
+ <div class="season">CHAPTER 4 · SEASON 2</div>
+ <div class="status" id="status">PROJECT IN DEVELOPMENT</div>
+ <p>Players online: <span id="count">...</span></p>
+ <a id="download" href="#" onclick="return false;">DOWNLOAD</a>
+ <footer>PROJECT RIFT · EARLY DEVELOPMENT</footer>
+</main>
+<script>
+const downloadUrl = "";
+const button = document.getElementById("download");
+if (downloadUrl) {
+  button.href = downloadUrl;
+  button.target = "_blank";
+  button.rel = "noopener";
+} else {
+  button.style.opacity = "0.7";
+  button.title = "Download link will be added when the game is ready";
+  button.onclick = function(e) {
+    e.preventDefault();
+    document.getElementById("status").textContent =
+      "DOWNLOAD LINK WILL BE ADDED WHEN THE GAME IS READY";
+  };
+}
+
+async function updatePlayers() {
+  try {
+    const response = await fetch("/api/lobby");
+    const data = await response.json();
+    document.getElementById("count").textContent = data.count;
+  } catch {
+    document.getElementById("count").textContent = "Offline";
+  }
+}
+updatePlayers();
+setInterval(updatePlayers, 5000);
+</script>
+</body>
+</html>

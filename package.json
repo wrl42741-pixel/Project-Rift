@@ -1,0 +1,30 @@
+{
+  "name": "c4s2project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "electron-main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest",
+    "pkg": "^5.8.1"
+  },
+  "bin": {
+    "projectrift": "server.js"
+  },
+  "build": {
+    "appId": "com.projectrift",
+    "productName": "Project Rift"
+  }
+}
