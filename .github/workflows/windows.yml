@@ -1,7 +1,10 @@
-name: Build Project Rift for Windows
+name: Build and Release Project Rift
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -21,8 +24,10 @@ jobs:
       - name: Build Windows app
         run: npm run build
 
-      - name: Upload Project Rift
-        uses: actions/upload-artifact@v4
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Project-Rift-Windows
-          path: dist/*.exe
+          tag_name: project-rift-v1
+          name: Project Rift v1
+          files: dist/*.exe
+          make_latest: true
