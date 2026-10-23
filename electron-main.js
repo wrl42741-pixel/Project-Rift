@@ -8,7 +8,7 @@ function createWindow() {
     backgroundColor: '#101010'
   });
 
-  win.loadFile('public/index.html');
+  win.loadFile('launcher/index.html');
 }
 
 app.whenReady().then(createWindow);

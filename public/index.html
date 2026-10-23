@@ -6,91 +6,59 @@
 <title>Project Rift</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101a32;color:white;font-family:Arial,sans-serif;overflow-x:hidden}
-nav{height:64px;background:#101827;display:flex;align-items:center;justify-content:center;gap:clamp(10px,2vw,30px);padding:10px;flex-wrap:wrap}
-nav button{background:transparent;color:white;border:0;padding:12px 8px;font-weight:900;cursor:pointer}
-nav button:hover,nav button.active{background:#fff;color:#14213d}
-#screen{min-height:calc(100vh - 64px);padding:clamp(20px,5vw,65px);background:radial-gradient(ellipse at 65% 35%,#456b9b,#1b2b4c 55%,#101827)}
-h1{font-size:clamp(32px,6vw,64px);margin:0 0 12px;font-weight:1000}
-.sub{color:#c5d8f2}
-.layout{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,1.5fr);gap:24px;align-items:center}
-.character{height:48vh;min-height:300px;display:grid;place-items:center;font-size:clamp(90px,18vw,200px);text-shadow:0 12px 20px #0008}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:10px;margin-top:24px}
-.tile{background:#263c60;border:2px solid #8da6c9;min-height:115px;padding:12px;cursor:pointer;text-align:center;font-weight:bold}
-.tile:hover,.tile.selected{border:3px solid #fff;background:#42699d}
-.tile .avatar{font-size:42px;display:block;margin-bottom:10px}
-.action{padding:14px 24px;background:#e9ed42;color:#151a24;border:0;font-weight:900;cursor:pointer;margin-top:20px}
-.hidden{display:none}
-@media(max-width:650px){nav{height:auto;gap:2px}.layout{grid-template-columns:1fr}.character{height:220px;min-height:220px}}
+body{
+ margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#263b59,#090d15 70%);
+ color:white;font-family:Arial,sans-serif;display:flex;align-items:center;
+ justify-content:center;text-align:center;padding:20px
+}
+.panel{width:100%;max-width:600px;padding:45px 25px;background:#101827dd;
+ border:1px solid #526783;border-radius:18px;box-shadow:0 20px 70px #0008}
+.logo{font-size:clamp(38px,9vw,64px);font-weight:900;letter-spacing:4px}
+.season{color:#9db8df;margin-top:12px;font-size:17px}
+.status{margin:30px 0;color:#c6d1e1}
+a{display:inline-block;background:#3185ff;color:white;text-decoration:none;border-radius:8px;
+ padding:16px 55px;font-size:20px;font-weight:bold;cursor:pointer}
+
+footer{margin-top:30px;color:#8190a7;font-size:12px}
 </style>
 </head>
 <body>
-<nav>
-<button class="active" data-page="PLAY">PLAY</button>
-<button data-page="BATTLE PASS">BATTLE PASS</button>
-<button data-page="COMPETE">COMPETE</button>
-<button data-page="LOCKER">LOCKER</button>
-<button data-page="ITEM SHOP">ITEM SHOP</button>
-<button data-page="CAREER">CAREER</button>
-<button data-page="V-BUCKS">V-BUCKS</button>
-</nav>
-<main id="screen">
-<section id="home">
-<div class="layout">
-<div>
-<div class="sub">PROJECT RIFT · CHAPTER 4</div>
-<h1>SEASON 2</h1>
-<p>Welcome to Project Rift.</p>
-<p>Players online: <span id="count">0</span></p>
-<button class="action" onclick="page('LOCKER')">OPEN LOCKER</button>
-</div>
-<div class="character">🎮</div>
-</div>
-</section>
-<section id="locker" class="hidden">
-<div class="sub">PROJECT RIFT / LOCKER</div>
-<h1>LOCKER</h1>
-<p>Choose your outfit</p>
-<div class="layout">
-<div>
-<h2 id="chosen">Rift Runner</h2>
-<p id="description">Original Project Rift outfit</p>
-<button class="action" onclick="page('PLAY')">BACK TO PLAY</button>
-</div>
-<div class="character" id="preview">🦸</div>
-</div>
-<h2>OUTFITS</h2>
-<div class="tiles" id="tiles">
-<div class="tile selected" data-name="Rift Runner" data-icon="🦸"><span class="avatar">🦸</span>Rift Runner</div>
-<div class="tile" data-name="Neon Striker" data-icon="🥷"><span class="avatar">🥷</span>Neon Striker</div>
-<div class="tile" data-name="Shadow Scout" data-icon="🕶️"><span class="avatar">🕶️</span>Shadow Scout</div>
-<div class="tile" data-name="Cyber Fox" data-icon="🦊"><span class="avatar">🦊</span>Cyber Fox</div>
-<div class="tile" data-name="Storm Knight" data-icon="⚔️"><span class="avatar">⚔️</span>Storm Knight</div>
-</div>
-</section>
-<section id="other" class="hidden">
-<div class="sub">PROJECT RIFT</div><h1 id="otherTitle"></h1>
-<p>This section is under development.</p>
-<button class="action" onclick="page('PLAY')">BACK TO PLAY</button>
-</section>
+<main class="panel">
+ <div class="logo">PROJECT RIFT</div>
+ <div class="season">CHAPTER 4 · SEASON 2</div>
+ <div class="status" id="status">PROJECT IN DEVELOPMENT</div>
+ <p>Players online: <span id="count">...</span></p>
+ <a id="download" href="#" >DOWNLOAD</a>
+ <footer>PROJECT RIFT · EARLY DEVELOPMENT</footer>
 </main>
 <script>
-function page(name){
-document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
-document.getElementById('home').classList.toggle('hidden',name!=='PLAY');
-document.getElementById('locker').classList.toggle('hidden',name!=='LOCKER');
-document.getElementById('other').classList.toggle('hidden',name==='PLAY'||name==='LOCKER');
-document.getElementById('otherTitle').textContent=name;
+const downloadUrl = "https://github.com/wrl42741-pixel/Project-Rift/raw/refs/heads/main/ProjectRift-PC.zip";
+const button = document.getElementById("download");
+if (downloadUrl) {
+  button.href = downloadUrl;
+  button.target = "_blank";
+  button.rel = "noopener";
+} else {
+  button.style.opacity = "0.7";
+  button.title = "Download link will be added when the game is ready";
+  button.onclick = function(e) {
+    e.preventDefault();
+    document.getElementById("status").textContent =
+      "DOWNLOAD LINK WILL BE ADDED WHEN THE GAME IS READY";
+  };
 }
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));
-document.querySelectorAll('.tile').forEach(tile=>tile.addEventListener('click',()=>{
-document.querySelectorAll('.tile').forEach(t=>t.classList.remove('selected'));
-tile.classList.add('selected');
-document.getElementById('chosen').textContent=tile.dataset.name;
-document.getElementById('preview').textContent=tile.dataset.icon;
-document.getElementById('description').textContent='Selected outfit: '+tile.dataset.name;
-}));
-fetch('/api/lobby').then(r=>r.json()).then(d=>document.getElementById('count').textContent=d.count).catch(()=>document.getElementById('count').textContent='0');
+
+async function updatePlayers() {
+  try {
+    const response = await fetch("/api/lobby");
+    const data = await response.json();
+    document.getElementById("count").textContent = data.count;
+  } catch {
+    document.getElementById("count").textContent = "Offline";
+  }
+}
+updatePlayers();
+setInterval(updatePlayers, 5000);
 </script>
 </body>
 </html>

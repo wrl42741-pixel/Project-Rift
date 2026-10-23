@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Rift Launcher</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101522;color:white;font-family:Arial,sans-serif;min-height:100vh;display:grid;place-items:center}
+main{width:min(900px,94%);padding:36px;background:linear-gradient(135deg,#202e49,#111522);border:1px solid #50658a;border-radius:16px}
+.logo{font-size:14px;letter-spacing:5px;color:#9eb9e9}
+h1{font-size:clamp(38px,7vw,70px);font-style:italic;margin:16px 0}
+p{color:#c6d1e5;line-height:1.6}
+.status{padding:14px;background:#0c1220;border-radius:8px;margin:25px 0}
+button{padding:15px 25px;border:0;border-radius:5px;font-size:16px;font-weight:bold;cursor:pointer;margin:5px}
+.play{background:#ffd43b;color:#151515}
+.secondary{background:#293852;color:white}
+small{color:#94a4c2}
+</style>
+</head>
+<body>
+<main>
+<div class="logo">PROJECT RIFT</div>
+<h1>ENTER THE RIFT</h1>
+<p>CHAPTER 4 · SEASON 2 INSPIRED</p>
+<div class="status" id="status">STATUS: GAME FILES NOT CONNECTED</div>
+<button class="play" onclick="alert('The Windows game is not ready yet. The launcher will be connected when the game build is available.')">PLAY</button>
+<button class="secondary" onclick="alert('The update system will be connected after the first Windows game build.')">CHECK FOR UPDATES</button>
+<p><small>Launcher prototype · Windows game coming soon</small></p>
+</main>
+</body>
+</html>

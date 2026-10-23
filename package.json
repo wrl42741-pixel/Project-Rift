@@ -1,12 +1,12 @@
 {
-  "name": "c4s2project",
+  "name": "project-rift-launcher",
   "version": "1.0.0",
   "description": "",
   "main": "electron-main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder --win portable"
+    "build": "electron-builder --win nsis"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,8 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "electron": "latest",
-    "electron-builder": "latest",
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3",
     "pkg": "^5.8.1"
   },
   "bin": {
@@ -25,6 +25,28 @@
   },
   "build": {
     "appId": "com.projectrift",
-    "productName": "Project Rift"
-  }
+    "productName": "Project Rift Launcher",
+    "files": [
+      "electron-main.js",
+      "launcher/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "Project Rift Setup.exe",
+      "shortcutName": "Project Rift Launcher",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "productName": "Project Rift Launcher"
 }
