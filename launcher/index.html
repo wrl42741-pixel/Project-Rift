@@ -6,27 +6,35 @@
 <title>Project Rift Launcher</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101522;color:white;font-family:Arial,sans-serif;min-height:100vh;display:grid;place-items:center}
-main{width:min(900px,94%);padding:36px;background:linear-gradient(135deg,#202e49,#111522);border:1px solid #50658a;border-radius:16px}
-.logo{font-size:14px;letter-spacing:5px;color:#9eb9e9}
-h1{font-size:clamp(38px,7vw,70px);font-style:italic;margin:16px 0}
-p{color:#c6d1e5;line-height:1.6}
-.status{padding:14px;background:#0c1220;border-radius:8px;margin:25px 0}
-button{padding:15px 25px;border:0;border-radius:5px;font-size:16px;font-weight:bold;cursor:pointer;margin:5px}
-.play{background:#ffd43b;color:#151515}
-.secondary{background:#293852;color:white}
-small{color:#94a4c2}
+body{margin:0;min-height:100vh;overflow:hidden;background:linear-gradient(180deg,rgba(5,10,22,.2),rgba(5,10,22,.92)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat,#101522;color:white;font-family:Arial,sans-serif}
+.brand{position:absolute;top:34px;left:42px;font-size:25px;font-weight:900;letter-spacing:3px;text-shadow:0 2px 12px #000}
+.subtitle{position:absolute;top:72px;left:44px;color:#c6d1e5;font-size:12px;letter-spacing:4px}
+nav{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);width:max-content;max-width:96vw;display:flex;align-items:center;justify-content:center;gap:clamp(12px,2.4vw,34px);padding:16px 24px;background:rgba(10,16,30,.86);border:1px solid rgba(180,205,255,.25);border-radius:14px;box-shadow:0 10px 40px #0008;backdrop-filter:blur(12px)}
+.nav-item{color:#d9e4f7;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-width:max-content;font-size:13px;font-weight:700;white-space:nowrap;transition:color .15s,transform .15s}
+.nav-item:hover,.nav-item.active{color:#fff;transform:translateY(-2px)}
+.nav-item.active:after{content:"";height:3px;width:28px;background:#65b8ff;border-radius:3px}
+.nav-item svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:650px){nav{gap:12px;padding:12px;max-width:98vw}.nav-item{font-size:10px}.nav-item svg{width:20px;height:20px}}
 </style>
 </head>
 <body>
-<main>
-<div class="logo">PROJECT RIFT</div>
-<h1>ENTER THE RIFT</h1>
-<p>CHAPTER 4 · SEASON 2 INSPIRED</p>
-<div class="status" id="status">STATUS: GAME FILES NOT CONNECTED</div>
-<button class="play" onclick="alert('The Windows game is not ready yet. The launcher will be connected when the game build is available.')">PLAY</button>
-<button class="secondary" onclick="alert('The update system will be connected after the first Windows game build.')">CHECK FOR UPDATES</button>
-<p><small>Launcher prototype · Windows game coming soon</small></p>
-</main>
+<div class="brand">PROJECT RIFT</div>
+<div class="subtitle">CHAPTER 4 · SEASON 2</div>
+<nav aria-label="Main navigation">
+<a class="nav-item active" href="#" data-page="Home"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+<a class="nav-item" href="#" data-page="Library"><svg viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 6h8"/></svg><span>Library</span></a>
+<a class="nav-item" href="#" data-page="Servers"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></svg><span>Servers</span></a>
+<a class="nav-item" href="#" data-page="Shop"><svg viewBox="0 0 24 24"><path d="M3 3h2l2.5 12h11L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span>Shop</span></a>
+<a class="nav-item" href="#" data-page="Download"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M4 17v4h16v-4"/></svg><span>Download</span></a>
+<a class="nav-item" href="#" data-page="Leaderboard"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H3v2a4 4 0 0 0 4 4M17 6h4v2a4 4 0 0 1-4 4"/></svg><span>Leaderboard</span></a>
+<a class="nav-item" href="#" data-page="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.2 1-1.5 2.6-1.5-.6a8 8 0 0 1-2 .9l-.3 1.6h-3l-.3-1.6a8 8 0 0 1-2-.9l-1.5.6-1.5-2.6 1.2-1a8 8 0 0 1 0-2l-1.2-1 1.5-2.6 1.5.6a8 8 0 0 1 2-.9l.3-1.6h3l.3 1.6a8 8 0 0 1 2 .9l1.5-.6 1.5 2.6-1.2 1a8 8 0 0 1 0 2z" transform="translate(-1 -1)"/></svg><span>Settings</span></a>
+</nav>
+<script>
+document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',e=>{
+e.preventDefault();
+document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
+item.classList.add('active');
+}));
+</script>
 </body>
 </html>
