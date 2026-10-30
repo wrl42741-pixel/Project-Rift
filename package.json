@@ -25,11 +25,13 @@
   },
   "build": {
     "appId": "com.projectrift",
-    "productName": "Project Rift Launcher",
+    "productName": "Project RIFT",
     "files": [
       "electron-main.js",
       "launcher/**",
-      "package.json"
+      "package.json",
+      "discord-login.js",
+      "preload.js"
     ],
     "win": {
       "target": [
@@ -43,10 +45,10 @@
     },
     "nsis": {
       "artifactName": "Project Rift Setup.exe",
-      "shortcutName": "Project Rift Launcher",
+      "shortcutName": "Project RIFT",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     }
   },
-  "productName": "Project Rift Launcher"
+  "productName": "Project RIFT"
 }

@@ -35,6 +35,45 @@ e.preventDefault();
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
 item.classList.add('active');
 }));
+
+const discordButton = [...document.querySelectorAll('button, a')]
+  .find(el => el.textContent.includes('Continue with Discord'));
+
+if (discordButton) {
+  discordButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    discordButton.textContent = 'Opening Discord...';
+    discordButton.style.pointerEvents = 'none';
+    try {
+      await window.discordAuth.login();
+    } catch (error) {
+      discordButton.textContent = 'Continue with Discord';
+      discordButton.style.pointerEvents = '';
+      alert(error.message || 'Could not start Discord login.');
+    }
+  });
+}
+
+if (window.discordAuth) {
+  window.discordAuth.onSuccess(user => {
+    const heading = document.querySelector('.login-title');
+    const subtitle = document.querySelector('.login-sub');
+    if (heading) heading.textContent = 'Welcome, ' + (user.global_name || user.username) + '!';
+    if (subtitle) subtitle.textContent = 'Discord connected successfully';
+    if (discordButton) {
+      discordButton.textContent = 'Discord Connected';
+      discordButton.style.pointerEvents = 'none';
+    }
+  });
+
+  window.discordAuth.onError(message => {
+    alert(message);
+    if (discordButton) {
+      discordButton.textContent = 'Continue with Discord';
+      discordButton.style.pointerEvents = '';
+    }
+  });
+}
 </script>
 </body>
 </html>
