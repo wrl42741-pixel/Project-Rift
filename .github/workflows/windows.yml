@@ -1,7 +1,10 @@
-name: Build and Release Project Rift
+name: Build and Release Project RIFT
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -22,14 +25,19 @@ jobs:
         run: npm install
 
       - name: Build Windows app
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run build
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Project-RIFT-Installer
+          path: dist/*.exe
+          if-no-files-found: error
 
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: project-rift-v1
-          name: Project Rift v1
+          name: Project RIFT v1
           files: dist/*.exe
           make_latest: true
