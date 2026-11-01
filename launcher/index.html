@@ -18,6 +18,16 @@ nav{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);width:max-
 </style>
 </head>
 <body>
+<div id="login-screen" style="position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#080d1cdd,#080d1cf5),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=85') center/cover">
+  <div style="width:min(420px,90vw);padding:42px 32px;text-align:center;background:#111a2bea;border:1px solid #ffffff30;border-radius:18px;box-shadow:0 20px 70px #0009">
+    <div style="font-size:30px;font-weight:900;letter-spacing:3px">PROJECT RIFT</div>
+    <p style="color:#b9c8df;margin:12px 0 30px">CHAPTER 4 · SEASON 2</p>
+    <h2 style="margin-bottom:10px">Welcome back</h2>
+    <p style="color:#b9c8df;font-size:14px;margin-bottom:26px">Sign in with your Discord account to continue.</p>
+    <button id="discordLogin" style="width:100%;padding:15px;border:0;border-radius:9px;background:#5865F2;color:white;font-size:15px;font-weight:bold;cursor:pointer">Continue with Discord</button>
+    <p id="login-status" style="color:#b9c8df;font-size:12px;margin-top:18px"></p>
+  </div>
+</div>
 <div class="brand">PROJECT RIFT</div>
 <div class="subtitle">CHAPTER 4 · SEASON 2</div>
 <nav aria-label="Main navigation">
@@ -36,20 +46,22 @@ document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('acti
 item.classList.add('active');
 }));
 
-const discordButton = [...document.querySelectorAll('button, a')]
-  .find(el => el.textContent.includes('Continue with Discord'));
+const discordButton = document.getElementById('discordLogin');
+const loginScreen = document.getElementById('login-screen');
+const loginStatus = document.getElementById('login-status');
 
 if (discordButton) {
   discordButton.addEventListener('click', async (event) => {
     event.preventDefault();
     discordButton.textContent = 'Opening Discord...';
-    discordButton.style.pointerEvents = 'none';
+    discordButton.disabled = true;
+    loginStatus.textContent = 'Complete sign-in in your browser.';
     try {
       await window.discordAuth.login();
     } catch (error) {
       discordButton.textContent = 'Continue with Discord';
-      discordButton.style.pointerEvents = '';
-      alert(error.message || 'Could not start Discord login.');
+      discordButton.disabled = false;
+      loginStatus.textContent = error.message || 'Could not start Discord login.';
     }
   });
 }
@@ -60,17 +72,14 @@ if (window.discordAuth) {
     const subtitle = document.querySelector('.login-sub');
     if (heading) heading.textContent = 'Welcome, ' + (user.global_name || user.username) + '!';
     if (subtitle) subtitle.textContent = 'Discord connected successfully';
-    if (discordButton) {
-      discordButton.textContent = 'Discord Connected';
-      discordButton.style.pointerEvents = 'none';
-    }
+    if (loginScreen) loginScreen.style.display = 'none';
   });
 
   window.discordAuth.onError(message => {
-    alert(message);
+    if (loginStatus) loginStatus.textContent = message;
     if (discordButton) {
       discordButton.textContent = 'Continue with Discord';
-      discordButton.style.pointerEvents = '';
+      discordButton.disabled = false;
     }
   });
 }
