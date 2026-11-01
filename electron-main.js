@@ -85,6 +85,7 @@ ipcMain.handle('discord-login-start', async () => {
         res.end('<h2>Discord connected! You can return to Project RIFT.</h2>');
 
         win?.webContents.send('discord-login-success', {
+          id: user.id,
           username: user.username,
           global_name: user.global_name || user.username,
           avatar: user.avatar || null

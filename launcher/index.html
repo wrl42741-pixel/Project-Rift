@@ -29,6 +29,11 @@ nav{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);width:max-
   </div>
 </div>
 <div class="brand">PROJECT RIFT</div>
+<div id="discord-user" style="position:absolute;top:20px;right:28px;display:none;align-items:center;gap:10px;padding:7px 12px;border:1px solid #ffffff25;border-radius:25px;background:#10182dcc">
+  <span id="discord-username" style="font-size:13px;font-weight:bold"></span>
+  <img id="discord-avatar" alt="Discord profile" style="width:34px;height:34px;border-radius:50%;object-fit:cover">
+</div>
+
 <div class="subtitle">CHAPTER 4 · SEASON 2</div>
 <nav aria-label="Main navigation">
 <a class="nav-item active" href="#" data-page="Home"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
@@ -73,6 +78,14 @@ if (window.discordAuth) {
     if (heading) heading.textContent = 'Welcome, ' + (user.global_name || user.username) + '!';
     if (subtitle) subtitle.textContent = 'Discord connected successfully';
     if (loginScreen) loginScreen.style.display = 'none';
+    const userBox = document.getElementById('discord-user');
+    const userName = document.getElementById('discord-username');
+    const avatar = document.getElementById('discord-avatar');
+    if (userName) userName.textContent = user.global_name || user.username;
+    if (avatar) avatar.src = user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    if (userBox) userBox.style.display = 'flex';
   });
 
   window.discordAuth.onError(message => {
