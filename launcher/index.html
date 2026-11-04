@@ -16,10 +16,10 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 .nav-item svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:650px){nav{right:5px;width:70px;gap:16px;padding:14px 5px}.nav-item{font-size:10px}.nav-item svg{width:20px;height:20px}}
 
-.settings-panel{display:none;position:absolute;top:50%;left:50%;transform:translate(-55%,-50%);width:min(620px,calc(100vw - 150px));max-height:82vh;overflow:auto;padding:28px;background:rgba(10,16,30,.91);border:1px solid #ffffff26;border-radius:18px;backdrop-filter:blur(14px);box-shadow:0 18px 55px #0009}
-.settings-panel h1{margin:0 0 8px;font-size:28px;letter-spacing:2px}
-.settings-subtitle{color:#aab9d0;font-size:13px;margin:0 0 22px}
-.setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 2px;border-bottom:1px solid #ffffff18}
+.settings-panel{display:none;position:fixed;inset:0;width:100%;height:100%;max-height:none;overflow:auto;padding:55px 8vw;background:#777;color:white;border:0;border-radius:0;transform:none;backdrop-filter:none;box-shadow:none;z-index:5}
+.settings-panel h1{max-width:900px;margin:0 auto 8px;font-size:32px;letter-spacing:2px}
+.settings-subtitle{max-width:900px;margin:0 auto 22px;color:#eeeeee;font-size:13px}
+.setting-row{max-width:900px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 2px;border-bottom:1px solid #ffffff45}
 .setting-name{font-size:15px;font-weight:700}
 .setting-description{font-size:12px;color:#9eacc2;margin-top:5px}
 .switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
@@ -29,7 +29,7 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 .switch input:checked+.switch-track{background:#398cff}
 .switch input:checked+.switch-track:before{transform:translateX(22px)}
 .switch input:focus-visible+.switch-track{outline:2px solid white;outline-offset:3px}
-@media(max-width:650px){.settings-panel{left:10px;transform:translateY(-50%);width:calc(100vw - 95px);padding:20px}.setting-name{font-size:13px}}
+body.settings-open .brand,body.settings-open .subtitle,body.settings-open nav,body.settings-open #discord-user{display:none!important}body.settings-open{background:#777!important;overflow:auto}.settings-back{display:block;max-width:900px;margin:0 auto 28px;padding:10px 16px;border:1px solid #ffffff70;border-radius:7px;background:#555;color:white;font-weight:bold;cursor:pointer}@media(max-width:650px){.settings-panel{padding:30px 22px}.setting-name{font-size:13px}}
 
 </style>
 </head>
@@ -62,6 +62,7 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 </nav>
 
 <section class="settings-panel" id="settings-panel">
+  <button class="settings-back" id="settings-back">← Back to Home</button>
   <h1>SETTINGS</h1>
   <p class="settings-subtitle">Customize your Project Rift experience</p>
 
@@ -88,13 +89,23 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 </section>
 
 <script>
+const settingsPanel = document.getElementById('settings-panel');
+
 document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',e=>{
 e.preventDefault();
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
 item.classList.add('active');
-const settingsPanel = document.getElementById('settings-panel');
-if (settingsPanel) settingsPanel.style.display = item.dataset.page === 'Settings' ? 'block' : 'none';
+const isSettings = item.dataset.page === 'Settings';
+document.body.classList.toggle('settings-open', isSettings);
+if (settingsPanel) settingsPanel.style.display = isSettings ? 'block' : 'none';
 }));
+
+document.getElementById('settings-back').addEventListener('click',()=>{
+document.body.classList.remove('settings-open');
+if (settingsPanel) settingsPanel.style.display = 'none';
+document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
+document.querySelector('[data-page="Home"]').classList.add('active');
+});
 
 const discordButton = document.getElementById('discordLogin');
 const loginScreen = document.getElementById('login-screen');
