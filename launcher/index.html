@@ -15,6 +15,22 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 .nav-item.active:after{content:"";height:3px;width:28px;background:#65b8ff;border-radius:3px}
 .nav-item svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:650px){nav{right:5px;width:70px;gap:16px;padding:14px 5px}.nav-item{font-size:10px}.nav-item svg{width:20px;height:20px}}
+
+.settings-panel{display:none;position:absolute;top:50%;left:50%;transform:translate(-55%,-50%);width:min(620px,calc(100vw - 150px));max-height:82vh;overflow:auto;padding:28px;background:rgba(10,16,30,.91);border:1px solid #ffffff26;border-radius:18px;backdrop-filter:blur(14px);box-shadow:0 18px 55px #0009}
+.settings-panel h1{margin:0 0 8px;font-size:28px;letter-spacing:2px}
+.settings-subtitle{color:#aab9d0;font-size:13px;margin:0 0 22px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 2px;border-bottom:1px solid #ffffff18}
+.setting-name{font-size:15px;font-weight:700}
+.setting-description{font-size:12px;color:#9eacc2;margin-top:5px}
+.switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch-track{position:absolute;inset:0;background:#454d5b;border-radius:20px;cursor:pointer;transition:.2s}
+.switch-track:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
+.switch input:checked+.switch-track{background:#398cff}
+.switch input:checked+.switch-track:before{transform:translateX(22px)}
+.switch input:focus-visible+.switch-track{outline:2px solid white;outline-offset:3px}
+@media(max-width:650px){.settings-panel{left:10px;transform:translateY(-50%);width:calc(100vw - 95px);padding:20px}.setting-name{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -44,11 +60,40 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 <a class="nav-item" href="#" data-page="Leaderboard"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H3v2a4 4 0 0 0 4 4M17 6h4v2a4 4 0 0 1-4 4"/></svg><span>Leaderboard</span></a>
 <a class="nav-item" href="#" data-page="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.2 1-1.5 2.6-1.5-.6a8 8 0 0 1-2 .9l-.3 1.6h-3l-.3-1.6a8 8 0 0 1-2-.9l-1.5.6-1.5-2.6 1.2-1a8 8 0 0 1 0-2l-1.2-1 1.5-2.6 1.5.6a8 8 0 0 1 2-.9l.3-1.6h3l.3 1.6a8 8 0 0 1 2 .9l1.5-.6 1.5 2.6-1.2 1a8 8 0 0 1 0 2z" transform="translate(-1 -1)"/></svg><span>Settings</span></a>
 </nav>
+
+<section class="settings-panel" id="settings-panel">
+  <h1>SETTINGS</h1>
+  <p class="settings-subtitle">Customize your Project Rift experience</p>
+
+  <div class="setting-row">
+    <div><div class="setting-name">Performance Mode</div><div class="setting-description">Enable performance-focused settings</div></div>
+    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+  </div>
+  <div class="setting-row">
+    <div><div class="setting-name">Mobile Builds</div><div class="setting-description">Show mobile build options</div></div>
+    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+  </div>
+  <div class="setting-row">
+    <div><div class="setting-name">Bubble Builds</div><div class="setting-description">Show bubble build options</div></div>
+    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+  </div>
+  <div class="setting-row">
+    <div><div class="setting-name">Disable Pre Edit</div><div class="setting-description">Disable pre-editing</div></div>
+    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+  </div>
+  <div class="setting-row">
+    <div><div class="setting-name">Reset On Release</div><div class="setting-description">Reset edits when releasing the button</div></div>
+    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+  </div>
+</section>
+
 <script>
 document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',e=>{
 e.preventDefault();
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
 item.classList.add('active');
+const settingsPanel = document.getElementById('settings-panel');
+if (settingsPanel) settingsPanel.style.display = item.dataset.page === 'Settings' ? 'block' : 'none';
 }));
 
 const discordButton = document.getElementById('discordLogin');
