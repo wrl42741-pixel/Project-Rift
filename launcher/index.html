@@ -200,7 +200,8 @@ document.body.classList.toggle('settings-open', isSettings);
 if (settingsPanel) settingsPanel.style.display = isSettings ? 'block' : 'none';
 }));
 
-document.getElementById('settings-back').addEventListener('click',()=>{
+const settingsBack = document.getElementById('settings-back');
+if (settingsBack) settingsBack.addEventListener('click',()=>{
 document.body.classList.remove('settings-open');
 if (settingsPanel) settingsPanel.style.display = 'none';
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
