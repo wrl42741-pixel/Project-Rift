@@ -31,6 +31,54 @@ nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:82px;d
 .switch input:focus-visible+.switch-track{outline:2px solid white;outline-offset:3px}
 body.settings-open .brand,body.settings-open .subtitle,body.settings-open nav,body.settings-open #discord-user{display:none!important}body.settings-open{background:#777!important;overflow:auto}.settings-back{display:block;max-width:900px;margin:0 auto 28px;padding:10px 16px;border:1px solid #ffffff70;border-radius:7px;background:#555;color:white;font-weight:bold;cursor:pointer}@media(max-width:650px){.settings-panel{padding:30px 22px}.setting-name{font-size:13px}}
 
+
+/* Full settings layout */
+.settings-panel{display:none;position:fixed;inset:0;width:100%;height:100%;max-height:none;overflow:auto;padding:18px 94px 22px 20px;background:linear-gradient(145deg,#252a31,#101318 65%,#090c11);color:#fff;border:0;border-radius:0;transform:none;z-index:5}
+body.settings-open{background:#101318!important;overflow:auto}
+body.settings-open .brand,body.settings-open .subtitle{display:none!important}
+body.settings-open nav{display:flex!important;z-index:8}
+body.settings-open #discord-user{display:none!important}
+.rift-settings{max-width:1600px;margin:auto}
+.settings-heading{text-align:right;font-size:14px;font-weight:bold;margin:28px 8px 16px}
+.settings-heading span,.settings-card h3 span{display:inline-block;width:3px;height:13px;background:#28a9ff;margin-left:5px}
+.account-card,.settings-card{background:linear-gradient(120deg,#ffffff12,#ffffff08);border:1px solid #ffffff20;border-radius:16px;box-shadow:0 8px 24px #0005}
+.account-card{height:100px;display:flex;align-items:center;gap:16px;padding:16px;margin-bottom:14px}
+.account-info{margin-left:auto;text-align:right;display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:bold}
+.account-info small{font-size:11px;color:#c2c8d1;font-weight:normal}
+.account-info .online-status{color:#49d68b}
+.account-card img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #ffffff35}
+.settings-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.settings-card{min-height:460px;padding:18px}
+.settings-card h3{text-align:right;font-size:14px;margin:0 0 20px}
+.resolution-card select{width:100%;padding:12px;background:#182735;color:#54baff;border:1px solid #31516a;border-radius:10px;font-weight:bold}
+.resolution-label,.build-label{text-align:right;color:#c8d0da;font-size:12px;margin:18px 0 8px}
+.resolution-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.resolution-buttons button,.build-options button{padding:12px 6px;border:1px solid #ffffff18;border-radius:9px;background:#18212d;color:#e5eaf2;font-weight:bold;cursor:pointer}
+.resolution-buttons button:hover,.build-options button:hover{border-color:#279fff}
+.build-options{display:flex;justify-content:flex-end;gap:8px}
+.build-options button.selected{background:#168ee8;color:white}
+.build-warning{font-size:10px;color:#b7c0cd;text-align:center;margin-top:18px}
+.player-card{padding-top:18px}
+.player-setting{min-height:70px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #ffffff18}
+.player-setting>div{margin-left:auto;text-align:right;display:flex;flex-direction:column;gap:5px}
+.player-setting strong{font-size:14px}
+.player-setting small{font-size:12px;color:#d0d5dd}
+.switch{position:relative;display:inline-block;width:58px;height:32px;flex-shrink:0}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch-track{position:absolute;inset:0;background:#777e89;border-radius:22px;cursor:pointer;transition:.2s}
+.switch-track:before{content:"";position:absolute;width:24px;height:24px;left:4px;top:4px;background:white;border-radius:50%;transition:.2s}
+.switch input:checked+.switch-track{background:#259df4}
+.switch input:checked+.switch-track:before{transform:translateX(26px)}
+.switch input:focus-visible+.switch-track{outline:2px solid white;outline-offset:3px}
+.fov-setting{padding:16px 0 4px}
+.fov-setting input{width:100%;accent-color:#249ff5}
+.fov-setting div{display:flex;justify-content:space-between;color:#aeb8c6;font-size:10px}
+.apply-settings{display:block;margin:12px 0 0 auto;padding:10px 22px;border:0;border-radius:20px;background:#168ee8;color:white;font-weight:bold;cursor:pointer}
+#settings-message{text-align:right;color:#70dca4;font-size:11px;min-height:12px}
+.settings-footer{display:flex;justify-content:space-between;gap:12px;margin-top:14px;padding:10px 12px;border:1px solid #ffffff18;border-radius:10px;background:#ffffff09;font-size:10px;color:#aeb8c6}
+.settings-footer span:first-child{color:#54d48b}
+@media(max-width:850px){.settings-panel{padding:12px 82px 16px 12px}.settings-columns{grid-template-columns:1fr}.settings-card{min-height:unset}.settings-heading{margin-top:12px}.account-card{height:80px}.player-setting{min-height:62px}}
+
 </style>
 </head>
 <body>
@@ -61,32 +109,84 @@ body.settings-open .brand,body.settings-open .subtitle,body.settings-open nav,bo
 <a class="nav-item" href="#" data-page="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.2 1-1.5 2.6-1.5-.6a8 8 0 0 1-2 .9l-.3 1.6h-3l-.3-1.6a8 8 0 0 1-2-.9l-1.5.6-1.5-2.6 1.2-1a8 8 0 0 1 0-2l-1.2-1 1.5-2.6 1.5.6a8 8 0 0 1 2-.9l.3-1.6h3l.3 1.6a8 8 0 0 1 2 .9l1.5-.6 1.5 2.6-1.2 1a8 8 0 0 1 0 2z" transform="translate(-1 -1)"/></svg><span>Settings</span></a>
 </nav>
 
-<section class="settings-panel" id="settings-panel">
-  <button class="settings-back" id="settings-back">← Back to Home</button>
-  <h1>SETTINGS</h1>
-  <p class="settings-subtitle">Customize your Project Rift experience</p>
 
-  <div class="setting-row">
-    <div><div class="setting-name">Performance Mode</div><div class="setting-description">Enable performance-focused settings</div></div>
-    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
-  </div>
-  <div class="setting-row">
-    <div><div class="setting-name">Mobile Builds</div><div class="setting-description">Show mobile build options</div></div>
-    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
-  </div>
-  <div class="setting-row">
-    <div><div class="setting-name">Bubble Builds</div><div class="setting-description">Show bubble build options</div></div>
-    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
-  </div>
-  <div class="setting-row">
-    <div><div class="setting-name">Disable Pre Edit</div><div class="setting-description">Disable pre-editing</div></div>
-    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
-  </div>
-  <div class="setting-row">
-    <div><div class="setting-name">Reset On Release</div><div class="setting-description">Reset edits when releasing the button</div></div>
-    <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+<section class="settings-panel" id="settings-panel">
+  <div class="rift-settings">
+    <div class="settings-heading">Settings <span></span></div>
+
+    <div class="account-card">
+      <label class="switch"><input type="checkbox" id="account-toggle"><span class="switch-track"></span></label>
+      <div class="account-info">
+        <div id="settings-username">Your Discord Account</div>
+        <small>Discord Account</small>
+        <small class="online-status">● ONLINE</small>
+      </div>
+      <img id="settings-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile">
+    </div>
+
+    <div class="settings-columns">
+      <div class="settings-card resolution-card">
+        <h3>Resolution Settings <span></span></h3>
+        <select id="resolution-select">
+          <option value="1920x1080">1920x1080</option>
+          <option value="1600x900">1600x900</option>
+          <option value="1280x720">1280x720</option>
+          <option value="1024x768">1024x768</option>
+        </select>
+        <div class="resolution-label">Build Options</div>
+        <div class="resolution-buttons">
+          <button type="button" data-resolution="known">Known Resolution</button>
+          <button type="button" data-resolution="custom">Custom Build</button>
+          <button type="button" data-resolution="restore">Restore Original</button>
+          <button type="button" data-resolution="custom2">Custom Build</button>
+        </div>
+        <div class="build-label">Build Type</div>
+        <div class="build-options">
+          <button type="button" class="selected" data-build="Normal">Normal</button>
+          <button type="button" data-build="Performance">Performance</button>
+          <button type="button" data-build="Mobile">Mobile</button>
+        </div>
+        <p class="build-warning">Warning: Manual builds may cause issues with stability and performance. Use at your own risk.</p>
+      </div>
+
+      <div class="settings-card player-card">
+        <h3>Player Settings <span></span></h3>
+        <div class="player-setting">
+          <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+          <div><strong>Performance Mode - High FPS and Low Latency</strong><small>Enable performance mode</small></div>
+        </div>
+        <div class="player-setting">
+          <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+          <div><strong>Mobile Build</strong><small>Version for Mobile Device</small></div>
+        </div>
+        <div class="player-setting">
+          <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+          <div><strong>Bubble Build</strong><small>Build in Bubble</small></div>
+        </div>
+        <div class="player-setting">
+          <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+          <div><strong>Disable Pre Edit</strong><small>Disable Pre-Edit</small></div>
+        </div>
+        <div class="player-setting">
+          <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+          <div><strong>Reset On Release</strong><small>Reset Upon Release</small></div>
+        </div>
+        <div class="fov-setting">
+          <input type="range" id="fov-slider" min="10" max="90" value="90">
+          <div><span>10F</span><span id="fov-value">90F</span></div>
+        </div>
+        <button type="button" class="apply-settings" id="apply-settings">Apply</button>
+        <p id="settings-message"></p>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <span>● Connected</span>
+      <span>PROJECT RIFT · CHAPTER 4 SEASON 2</span>
+    </div>
   </div>
 </section>
+
 
 <script>
 const settingsPanel = document.getElementById('settings-panel');
@@ -105,6 +205,37 @@ document.body.classList.remove('settings-open');
 if (settingsPanel) settingsPanel.style.display = 'none';
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
 document.querySelector('[data-page="Home"]').classList.add('active');
+});
+
+
+const settingsAvatar = document.getElementById('settings-avatar');
+const settingsUsername = document.getElementById('settings-username');
+if (settingsAvatar && document.getElementById('discord-avatar')) {
+  settingsAvatar.src = document.getElementById('discord-avatar').src;
+}
+if (settingsUsername && document.getElementById('discord-username')) {
+  const syncProfile = () => {
+    settingsUsername.textContent = document.getElementById('discord-username').textContent || 'Your Discord Account';
+    settingsAvatar.src = document.getElementById('discord-avatar').src;
+  };
+  syncProfile();
+  if (window.discordAuth) window.discordAuth.onSuccess(syncProfile);
+}
+document.querySelectorAll('[data-build]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('[data-build]').forEach(b => b.classList.remove('selected'));
+  button.classList.add('selected');
+}));
+document.querySelectorAll('[data-resolution]').forEach(button => button.addEventListener('click', () => {
+  const select = document.getElementById('resolution-select');
+  if (button.dataset.resolution === 'restore') select.value = '1920x1080';
+  if (button.dataset.resolution === 'known') select.value = '1920x1080';
+  if (button.dataset.resolution === 'custom' || button.dataset.resolution === 'custom2') select.value = '1600x900';
+}));
+document.getElementById('fov-slider').addEventListener('input', event => {
+  document.getElementById('fov-value').textContent = event.target.value + 'F';
+});
+document.getElementById('apply-settings').addEventListener('click', () => {
+  document.getElementById('settings-message').textContent = 'Settings selected.';
 });
 
 const discordButton = document.getElementById('discordLogin');
