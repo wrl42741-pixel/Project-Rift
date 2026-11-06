@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         layout.setBackgroundColor(Color.rgb(17, 17, 17));
 
         TextView title = new TextView(this);
-        title.setText("PROJECT RIFT");
+        title.setText("Project PARADOX");
         title.setTextColor(Color.WHITE);
         title.setTextSize(32);
         title.setGravity(Gravity.CENTER);

@@ -25,7 +25,7 @@
   },
   "build": {
     "appId": "com.projectrift",
-    "productName": "Project RIFT",
+    "productName": "Project PARADOX",
     "files": [
       "electron-main.js",
       "launcher/**",
@@ -44,11 +44,11 @@
       ]
     },
     "nsis": {
-      "artifactName": "Project Rift Setup.exe",
-      "shortcutName": "Project RIFT",
+      "artifactName": "Project PARADOX Setup.exe",
+      "shortcutName": "Project PARADOX",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     }
   },
-  "productName": "Project RIFT"
+  "productName": "Project PARADOX"
 }

@@ -1,4 +1,4 @@
-name: Build and Release Project RIFT
+name: Build and Release Project PARADOX
 
 on:
   workflow_dispatch:
@@ -38,6 +38,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: project-rift-v1
-          name: Project RIFT v1
+          name: Project PARADOX v1
           files: dist/*.exe
           make_latest: true

@@ -11,7 +11,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1280,
     height: 720,
-    title: 'Project RIFT',
+    title: 'Project PARADOX',
     backgroundColor: '#101010',
     webPreferences: {
       contextIsolation: true,
@@ -82,7 +82,7 @@ ipcMain.handle('discord-login-start', async () => {
         if (!userResponse.ok) throw new Error('Could not retrieve Discord profile.');
 
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        res.end('<h2>Discord connected! You can return to Project RIFT.</h2>');
+        res.end('<h2>Discord connected! You can return to Project PARADOX.</h2>');
 
         win?.webContents.send('discord-login-success', {
           id: user.id,

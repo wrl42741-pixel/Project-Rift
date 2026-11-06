@@ -12,7 +12,7 @@ app.get("/old", (req, res) => {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>C4S2 Project</title>
+<title>Chapter 4 Season 4 Project</title>
 <style>
 body {
   background:#111;
@@ -37,7 +37,7 @@ button {
 </head>
 <body>
 <div class="box">
-<h1>Fortnite C4S2 Project</h1>
+<h1>Fortnite Chapter 4 Season 4 Project</h1>
 <h2>Lobby</h2>
 <p>Players online: <span id="count">0</span></p>
 <button onclick="location.reload()">Refresh</button>
@@ -55,5 +55,5 @@ app.get("/api/lobby", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`C4S2 server running on port ${PORT}`);
+  console.log(`Chapter 4 Season 4 server running on port ${PORT}`);
 });
