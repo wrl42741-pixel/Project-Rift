@@ -6,6 +6,7 @@ const { CLIENT_ID, REDIRECT_URI } = require('./discord-login');
 
 let win;
 let loginServer;
+let discordUser = null;
 
 function createWindow() {
   win = new BrowserWindow({
@@ -22,6 +23,8 @@ function createWindow() {
 
   win.loadFile('launcher/index.html');
 }
+
+ipcMain.handle('discord-user-get', () => discordUser);
 
 ipcMain.handle('discord-login-start', async () => {
   if (loginServer) throw new Error('התחברות כבר בתהליך.');
@@ -84,12 +87,13 @@ ipcMain.handle('discord-login-start', async () => {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end('<h2>Discord connected! You can return to Project PARADOX.</h2>');
 
-        win?.webContents.send('discord-login-success', {
+        discordUser = {
           id: user.id,
           username: user.username,
           global_name: user.global_name || user.username,
           avatar: user.avatar || null
-        });
+        };
+        win?.webContents.send('discord-login-success', discordUser);
 
         resolve({ started: true });
       } catch (error) {

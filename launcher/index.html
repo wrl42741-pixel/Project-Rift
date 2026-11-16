@@ -9,12 +9,12 @@
 body{margin:0;min-height:100vh;overflow:hidden;background:linear-gradient(180deg,rgba(5,10,22,.2),rgba(5,10,22,.92)),url('background.jpg') center/cover no-repeat,#101522;color:white;font-family:Arial,sans-serif}
 .brand{position:absolute;top:34px;left:42px;font-size:25px;font-weight:900;letter-spacing:3px;text-shadow:0 2px 12px #000}
 .subtitle{position:absolute;top:72px;left:44px;color:#c6d1e5;font-size:12px;letter-spacing:4px}
-nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);height:min(82vh,760px);width:82px;display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px 8px;background:rgba(10,16,30,.86);border:1px solid rgba(180,205,255,.25);border-radius:14px;box-shadow:0 10px 40px #0008;backdrop-filter:blur(12px)}
-.nav-item{color:#d9e4f7;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-width:max-content;font-size:13px;font-weight:700;white-space:nowrap;transition:color .15s,transform .15s}
+nav{position:absolute;right:12px;top:50%;transform:translateY(-50%);height:95vh;width:115px;display:flex;flex-direction:column;align-items:center;gap:22px;padding:26px 8px;background:rgba(10,16,30,.86);border:1px solid rgba(180,205,255,.25);border-radius:14px;box-shadow:0 10px 40px #0008;backdrop-filter:blur(12px)}
+nav .nav-bottom{margin-top:auto}nav .nav-spacer{flex:1 1 auto;min-height:0}.nav-item{color:#d9e4f7;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-width:max-content;font-size:14px;font-weight:700;white-space:nowrap;transition:color .15s,transform .15s}
 .nav-item:hover,.nav-item.active{color:#fff;transform:translateY(-2px)}
 .nav-item.active:after{content:"";height:3px;width:28px;background:#65b8ff;border-radius:3px}
-.nav-item svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:650px){nav{right:5px;width:70px;height:82vh;gap:16px;padding:14px 5px}.nav-item{font-size:10px}.nav-item svg{width:20px;height:20px}.sidebar-avatar{width:30px;height:30px}}
+.nav-item svg{width:32px;height:32px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:650px){nav{right:8px;width:100px;height:92vh;gap:18px;padding:20px 6px}.nav-item{font-size:10px}.nav-item svg{width:27px;height:27px}.sidebar-avatar{width:38px;height:38px}}
 
 .settings-panel{display:none;position:fixed;inset:0;width:100%;height:100%;max-height:none;overflow:auto;padding:55px 8vw;background:#777;color:white;border:0;border-radius:0;transform:none;backdrop-filter:none;box-shadow:none;z-index:5}
 .settings-panel h1{max-width:900px;margin:0 auto 8px;font-size:32px;letter-spacing:2px}
@@ -79,9 +79,18 @@ body.settings-open #discord-user{display:none!important}
 .settings-footer span:first-child{color:#54d48b}
 @media(max-width:850px){.settings-panel{padding:12px 82px 16px 12px}.settings-columns{grid-template-columns:1fr}.settings-card{min-height:unset}.settings-heading{margin-top:12px}.account-card{height:80px}.player-setting{min-height:62px}}
 
+
+/* Warm bronze background for every page except Home */
+body:not(.home-page) {
+  background: linear-gradient(145deg, #9a7548 0%, #8a6337 55%, #62472f 100%) !important;
+}
+body:not(.home-page) .settings-panel {
+  background: linear-gradient(145deg, #9a7548 0%, #8a6337 55%, #62472f 100%) !important;
+}
+
 </style>
 </head>
-<body>
+<body class="home-page">
 <div id="login-screen" style="position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#080d1cdd,#080d1cf5),url('background.jpg') center/cover">
   <div style="width:min(420px,90vw);padding:42px 32px;text-align:center;background:#111a2bea;border:1px solid #ffffff30;border-radius:18px;box-shadow:0 20px 70px #0009">
     <div style="font-size:30px;font-weight:900;letter-spacing:3px">Project PARADOX</div>
@@ -122,9 +131,9 @@ body.settings-open #discord-user{display:none!important}
     <div class="account-card">
       <label class="switch"><input type="checkbox" id="account-toggle"><span class="switch-track"></span></label>
       <div class="account-info">
-        <div id="settings-username">Your Discord Account</div>
-        <small>Discord Account</small>
-        <small class="online-status">● ONLINE</small>
+        <div id="settings-username">מתחבר ל־Discord...</div>
+        <small>חשבון Discord</small>
+        <small class="online-status">● מחובר</small>
       </div>
       <img id="settings-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile">
     </div>
@@ -202,31 +211,23 @@ document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('acti
 item.classList.add('active');
 const isSettings = item.dataset.page === 'Settings';
 document.body.classList.toggle('settings-open', isSettings);
+document.body.classList.toggle('home-page', item.dataset.page === 'Home');
+document.body.classList.toggle('home-page', item.dataset.page === 'Home');
 if (settingsPanel) settingsPanel.style.display = isSettings ? 'block' : 'none';
 }));
 
 const settingsBack = document.getElementById('settings-back');
 if (settingsBack) settingsBack.addEventListener('click',()=>{
 document.body.classList.remove('settings-open');
+document.body.classList.add('home-page');
+document.body.classList.add('home-page');
 if (settingsPanel) settingsPanel.style.display = 'none';
 document.querySelectorAll('.nav-item').forEach(link=>link.classList.remove('active'));
 document.querySelector('[data-page="Home"]').classList.add('active');
 });
 
 
-const settingsAvatar = document.getElementById('settings-avatar');
-const settingsUsername = document.getElementById('settings-username');
-if (settingsAvatar && document.getElementById('discord-avatar')) {
-  settingsAvatar.src = document.getElementById('discord-avatar').src;
-}
-if (settingsUsername && document.getElementById('discord-username')) {
-  const syncProfile = () => {
-    settingsUsername.textContent = document.getElementById('discord-username').textContent || 'Your Discord Account';
-    settingsAvatar.src = document.getElementById('discord-avatar').src;
-  };
-  syncProfile();
-  if (window.discordAuth) window.discordAuth.onSuccess(syncProfile);
-}
+
 document.querySelectorAll('[data-build]').forEach(button => button.addEventListener('click', () => {
   document.querySelectorAll('[data-build]').forEach(b => b.classList.remove('selected'));
   button.classList.add('selected');
@@ -264,8 +265,28 @@ if (discordButton) {
   });
 }
 
+async function updateDiscordProfile(user) {
+  if (!user) return;
+
+  const name = user.global_name || user.username;
+  const avatarUrl = user.avatar
+    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`
+    : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+  const settingsUsername = document.getElementById('settings-username');
+  const settingsAvatar = document.getElementById('settings-avatar');
+  const sidebarAvatar = document.getElementById('sidebar-avatar');
+
+  if (settingsUsername) settingsUsername.textContent = name;
+  if (settingsAvatar) settingsAvatar.src = avatarUrl;
+  if (sidebarAvatar) sidebarAvatar.src = avatarUrl;
+}
+
 if (window.discordAuth) {
+  window.discordAuth.getUser().then(updateDiscordProfile).catch(console.error);
+
   window.discordAuth.onSuccess(user => {
+    updateDiscordProfile(user);
     const heading = document.querySelector('.login-title');
     const subtitle = document.querySelector('.login-sub');
     if (heading) heading.textContent = 'Welcome, ' + (user.global_name || user.username) + '!';
@@ -278,6 +299,10 @@ if (window.discordAuth) {
     if (avatar) avatar.src = user.avatar
       ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`
       : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    const settingsUsername = document.getElementById('settings-username');
+    const settingsAvatar = document.getElementById('settings-avatar');
+    if (settingsUsername) settingsUsername.textContent = user.global_name || user.username;
+    if (settingsAvatar && avatar) settingsAvatar.src = avatar.src;
     const sidebarAvatar = document.getElementById('sidebar-avatar');
     if (sidebarAvatar && avatar) sidebarAvatar.src = avatar.src;
     if (userBox) userBox.style.display = 'none';
