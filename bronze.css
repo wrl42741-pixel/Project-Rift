@@ -1,0 +1,95 @@
+/* PARADOX BRONZE GLOW THEME */
+:root{
+  --bronze:#cd9250;
+  --bronze-light:#f4c27a;
+  --bronze-dark:#75451f;
+  --bronze-glow:rgba(205,146,80,.55);
+}
+
+body:not(.settings-open){
+  background:
+    radial-gradient(ellipse at 50% 40%,#53351b55,transparent 65%),
+    linear-gradient(145deg,#17120d,#090909 70%) !important;
+}
+
+nav{
+  background:linear-gradient(145deg,#21170e,#100c08) !important;
+  border:1px solid var(--bronze-glow) !important;
+  box-shadow:0 0 18px var(--bronze-glow),0 10px 40px #0009 !important;
+}
+
+.nav-item{
+  color:#d4b18a !important;
+}
+
+.nav-item:hover,.nav-item.active{
+  color:var(--bronze-light) !important;
+  text-shadow:0 0 12px var(--bronze-glow) !important;
+}
+
+.nav-item.active:after{
+  background:var(--bronze-light) !important;
+  box-shadow:0 0 12px var(--bronze) !important;
+}
+
+.account-card,.settings-card{
+  background:linear-gradient(135deg,#392718cc,#1a120bdf) !important;
+  border:1px solid var(--bronze-glow) !important;
+  box-shadow:0 0 14px #cd925022,0 8px 24px #0007 !important;
+}
+
+.settings-heading span,.settings-card h3 span{
+  background:var(--bronze-light) !important;
+  box-shadow:0 0 10px var(--bronze) !important;
+}
+
+.resolution-card select,
+.resolution-buttons button,
+.build-options button{
+  background:#24180e !important;
+  color:var(--bronze-light) !important;
+  border-color:#a8753d !important;
+}
+
+.resolution-buttons button:hover,
+.build-options button:hover{
+  border-color:var(--bronze-light) !important;
+  box-shadow:0 0 12px var(--bronze-glow) !important;
+}
+
+.build-options button.selected,
+.apply-settings{
+  background:linear-gradient(135deg,#d49a54,#8d5828) !important;
+  color:#fff !important;
+  box-shadow:0 0 15px var(--bronze-glow) !important;
+}
+
+.switch input:checked+.switch-track{
+  background:var(--bronze) !important;
+  box-shadow:0 0 10px var(--bronze-glow) !important;
+}
+
+.fov-setting input{
+  accent-color:var(--bronze-light) !important;
+}
+
+.settings-footer{
+  background:#291b0e !important;
+  border-color:#a8753d55 !important;
+}
+
+#discord-user,#login-screen>div,#profile-menu{
+  background:linear-gradient(145deg,#281b10,#15100b) !important;
+  border-color:var(--bronze-glow) !important;
+  box-shadow:0 0 18px #cd925033 !important;
+}
+
+#change-name-button{
+  background:linear-gradient(145deg,#3b2918,#24180e) !important;
+  border:1px solid #a8753d !important;
+}
+
+#logout-button{
+  border:1px solid #a8753d !important;
+}
+

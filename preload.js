@@ -3,6 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('discordAuth', {
   login: () => ipcRenderer.invoke('discord-login-start'),
   getUser: () => ipcRenderer.invoke('discord-user-get'),
+  logout: () => ipcRenderer.invoke('discord-logout'),
   onSuccess: (callback) => {
     ipcRenderer.on('discord-login-success', (_event, user) => callback(user));
   },

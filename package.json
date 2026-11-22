@@ -31,7 +31,8 @@
       "launcher/**",
       "package.json",
       "discord-login.js",
-      "preload.js"
+      "preload.js",
+      "discord-session.js"
     ],
     "win": {
       "target": [
