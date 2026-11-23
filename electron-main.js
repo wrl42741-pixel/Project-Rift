@@ -17,6 +17,7 @@ function createWindow() {
     minWidth: 1280,
     minHeight: 800,
     title: 'Project PARADOX',
+    autoHideMenuBar: true,
     backgroundColor: '#101010',
     webPreferences: {
       contextIsolation: true,
@@ -25,6 +26,7 @@ function createWindow() {
     }
   });
 
+  win.setMenuBarVisibility(false);
   win.loadFile('launcher/index.html');
 }
 
